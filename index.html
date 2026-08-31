@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xyro - Portfolio</title>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Font Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #0b0c10;
+      color: #e0e6ed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 10px;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: #121318;
+      border: 1px solid rgba(139, 92, 246, 0.15);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* PROFILE HEADER */
+    .profile-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 16px;
+    }
+
+    .avatar-wrapper a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #a855f7;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+      transition: transform 0.25s ease;
+    }
+
+    .avatar-wrapper a:hover .avatar-img {
+      transform: scale(1.05);
+    }
+
+    .status-dot {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 16px;
+      height: 16px;
+      background-color: #22c55e;
+      border: 3px solid #121318;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #c084fc;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .title-sub {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      color: #d8b4fe;
+    }
+
+    .status-badge .dot {
+      width: 7px;
+      height: 7px;
+      background-color: #a855f7;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #a855f7;
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .section-title i {
+      width: 16px;
+      height: 16px;
+      color: #c084fc;
+    }
+
+    /* SKILLS */
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .skill-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .skill-icon {
+      width: 38px;
+      height: 38px;
+      background: rgba(168, 85, 247, 0.15);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #c084fc;
+      font-weight: bold;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .skill-info {
+      flex-grow: 1;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .progress-bar {
+      height: 6px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #9333ea, #c084fc);
+      border-radius: 10px;
+    }
+
+    /* HOBBIES GRID */
+    .hobby-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .hobby-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    .hobby-card i {
+      width: 22px;
+      height: 22px;
+      color: #c084fc;
+    }
+
+    /* CONNECT GRID */
+    .connect-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .connect-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: #e2e8f0;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .connect-btn:hover {
+      background: rgba(168, 85, 247, 0.12);
+      border-color: rgba(168, 85, 247, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15);
+    }
+
+    .connect-btn i {
+      width: 24px;
+      height: 24px;
+      color: #c084fc;
+    }
+
+    .connect-btn .info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .connect-btn .title {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .connect-btn .handle {
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    
+    <!-- PROFILE CARD -->
+    <div class="card profile-card">
+      <div class="avatar-wrapper">
+        <a href="https://files.catbox.moe/me4131.jpg" target="_blank" title="Klik untuk lihat foto">
+          <img src="https://files.catbox.moe/me4131.jpg" alt="Xyro Profile" class="avatar-img">
+        </a>
+        <div class="status-dot"></div>
+      </div>
+      <h1 class="name">Xyro</h1>
+      <p class="title-sub">Website Engineer — Not Developer</p>
+      <div class="status-badge">
+        <span class="dot"></span> available for work
+      </div>
+    </div>
+
+    <!-- SKILLS CARD -->
+    <div class="card">
+      <div class="section-title">
+        <i data-lucide="zap"></i> Skills
+      </div>
+      <div class="skills-list">
+        
+        <div class="skill-item">
+          <div class="skill-icon">JS</div>
+          <div class="skill-info">
+            <div class="skill-header">
+              <span>JavaScript</span>
+              <span>100%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-icon">5</div>
+          <div class="skill-info">
+            <div class="skill-header">
+              <span>HTML</span>
+              <span>80%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 80%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-icon"><i data-lucide="code-2" style="width:18px;height:18px;"></i></div>
+          <div class="skill-info">
+            <div class="skill-header">
+              <span>Python</span>
+              <span>30%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 30%;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- HOBBY CARD -->
+    <div class="card">
+      <div class="section-title">
+        <i data-lucide="heart"></i> Hobby
+      </div>
+      <div class="hobby-grid">
+        <div class="hobby-card">
+          <i data-lucide="code"></i>
+          <span>Coding</span>
+        </div>
+        <div class="hobby-card">
+          <i data-lucide="flame"></i>
+          <span>Rokok</span>
+        </div>
+        <div class="hobby-card">
+          <i data-lucide="book-open"></i>
+          <span>Belajar</span>
+        </div>
+        <div class="hobby-card">
+          <i data-lucide="gamepad-2"></i>
+          <span>Game</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONNECT CARD -->
+    <div class="card">
+      <div class="section-title">
+        <i data-lucide="send"></i> Connect
+      </div>
+      <div class="connect-grid">
+        
+        <!-- Bot Build -->
+        <a href="https://t.me/xyrobuild_bot" target="_blank" class="connect-btn">
+          <i data-lucide="bot"></i>
+          <div class="info">
+            <span class="title">Bot Build</span>
+            <span class="handle">@xyrobuild_bot</span>
+          </div>
+        </a>
+
+        <!-- Telegram -->
+        <a href="https://t.me/Xyronih" target="_blank" class="connect-btn">
+          <i data-lucide="send"></i>
+          <div class="info">
+            <span class="title">Telegram</span>
+            <span class="handle">@Xyronih</span>
+          </div>
+        </a>
+
+        <!-- Channel -->
+        <a href="https://t.me/innfoxyro" target="_blank" class="connect-btn">
+          <i data-lucide="radio"></i>
+          <div class="info">
+            <span class="title">Channel</span>
+            <span class="handle">@innfoxyro</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
